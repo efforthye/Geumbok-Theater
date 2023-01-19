@@ -6,6 +6,7 @@ import LogInContainer from "./components/LogIn/Container";
 import AdminContainer from "./components/Admin/Container";
 import MyPageContainer from "./components/Mypage/Container";
 import DetailMovie from "./components/Pages/DetailMovie";
+import BoxOfficeContainer from "./components/boxOffice/Container";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/mypage/:sub" element={<MyPageContainer />} />
         <Route path="/mypage/*" element={<MyPageContainer />} />
         <Route path="/detail/*" element={<DetailMovie />} />
+        <Route path="/boxOffice/*" element={<BoxOfficeContainer />} />
       </Routes>
     </>
   );
