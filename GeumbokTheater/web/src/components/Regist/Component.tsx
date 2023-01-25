@@ -31,7 +31,7 @@ const RegistComponent = () => {
     clickButton: () => {
       setInfo({ ...registInfo, openPostcode: !openPostcode });
     },
-    selectAddress: (_data) => {
+    selectAddress: (_data: { address: string; zonecode: string }) => {
       setInfo((state) => ({ ...state, address: _data.address }));
       setInfo((state) => ({ ...state, zonecode: _data.zonecode }));
       setInfo((state) => ({ ...state, openPostcode: false }));

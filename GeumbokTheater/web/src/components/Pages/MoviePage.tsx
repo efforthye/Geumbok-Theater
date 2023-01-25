@@ -3,81 +3,77 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
-import SHA256 from "crypto-js/sha256";
+
 const rows = [
   {
     id: 1,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "SnowJon",
-    phone: "010-2052-9649",
+    theaterNum: "1관",
+    MovieList: "3",
+    SeatBlock: "29/100",
+    genre: "액션",
   },
   {
     id: 2,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "KimSunJu",
-    phone: "010-2052-9649",
+    theaterNum: "2관",
+    MovieList: "4",
+    SeatBlock: "24/100",
+    genre: "멜로",
   },
   {
     id: 3,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "YeomYeNa",
-    phone: "010-2052-9649",
+    theaterNum: "3관",
+    MovieList: "5",
+    SeatBlock: "32/100",
+    genre: "코믹",
   },
   {
     id: 4,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "JangJeongHyun",
-    phone: "010-2052-9649",
-    address: "서울시 송파구 위례동 위례포레샤인 2301-1006",
-    email: "ghkdwja9649@gmail.com",
+    theaterNum: "4관",
+    MovieList: "2",
+    SeatBlock: "98/100",
+    genre: "범죄",
   },
   {
     id: 5,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "LeeKaWon",
-    phone: "010-2052-9649",
+    theaterNum: "5관",
+    MovieList: "5",
+    SeatBlock: "55/100",
+    genre: "사극",
   },
   {
     id: 6,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "ParkYeSung",
-    phone: "010-2052-9649",
+    theaterNum: "6관",
+    MovieList: "3",
+    SeatBlock: "1/100",
+    genre: "추리",
   },
   {
     id: 7,
-    Id: "jung9649",
-    PW: SHA256("1234").toString(),
-    Name: "ParkHyeRim",
-    phone: "010-2052-9649",
+    theaterNum: "7관",
+    MovieList: "6",
+    SeatBlock: "12/100",
+    genre: "모험",
   },
 ];
 
-const AdminPage = () => {
+const MoviePage = () => {
   const [del, setDel] = useState(rows);
-  const deleteUser = (id) => {
+  const deleteUser = (id: number) => {
     setDel(del.filter((item) => item.id !== id));
   };
 
   const columns = [
     // field의 value는 rows의 키값이랑 일치해야함
-    { field: "id", headerName: "No", width: 50 },
-    { field: "Name", headerName: "이름", width: 200 },
-    { field: "Id", headerName: "ID", width: 200 },
-    { field: "PW", headerName: "비밀번호", width: 100 },
-    { field: "phone", headerName: "핸드폰", width: 170 },
-    { field: "address", headerName: "주소", width: 200 },
-    { field: "email", headerName: "이메일", width: 200 },
+    { field: "id", headerName: "No", width: 100 },
+    { field: "theaterNum", headerName: "극장번호", width: 150 },
+    { field: "MovieList", headerName: "상영영화목록", width: 150 },
+    { field: "SeatBlock", headerName: "극장좌석현황", width: 150 },
+    { field: "genre", headerName: "장르", width: 100 },
     {
       field: "action",
       headerName: "수정 / 삭제",
       width: 150,
-      renderCell: (item) => {
+      renderCell: (item: { row: { id: number } }) => {
         return (
           <>
             <Link to={`/admin/edit/${item.row.id}`}>
@@ -96,7 +92,7 @@ const AdminPage = () => {
   ];
 
   return (
-    <AdminBox>
+    <MovieBox>
       <DataGrid
         rows={del}
         disableSelectionOnClick
@@ -105,12 +101,12 @@ const AdminPage = () => {
         rowsPerPageOptions={[5]}
         // checkboxSelection
       />
-    </AdminBox>
+    </MovieBox>
   );
 };
-export default AdminPage;
+export default MoviePage;
 
-const AdminBox = styled.div`
+const MovieBox = styled.div`
   flex: 4;
   padding: 0 20px;
 

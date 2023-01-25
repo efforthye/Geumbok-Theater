@@ -21,7 +21,7 @@ const app = express();
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-app.set("port", process.env.PORT || 8081);
+app.set("port", process.env.PORT || 8080);
 
 app.use((req, res, next) => {
   if (process.env.NODE_ENV === "production") morgan("combined")(req, res, next);
