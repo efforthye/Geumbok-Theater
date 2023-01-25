@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
-const RegistComponent = () => {
+const RegistComponent = (): React.ReactElement => {
   const [registInfo, setInfo] = useState({
     name: "",
     ID: "",
@@ -51,6 +51,14 @@ const RegistComponent = () => {
                     type={"text"}
                     placeholder={"ID"}
                     autoComplete={"off"}
+                    value={ID}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      // setInfo((state) => ({ ...state, ID: (e.target as HTMLInputElement).value }));
+                      setInfo((state) => ({
+                        ...state,
+                        ID: e.currentTarget.value,
+                      }));
+                    }}
                   />
                 </div>
                 <div>
