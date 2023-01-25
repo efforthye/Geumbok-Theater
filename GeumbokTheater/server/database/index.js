@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 // 컬렉션(==테이블)은 import 하기만 해도 생성됨
 import Test from "./test.js";
 import Test2 from "./test2.js";
+import User from "./user.js";
+import Board from "./board.js";
 
 // 기본 요청 url : mongodb://localhost:27017/test
 const dbUrl =
