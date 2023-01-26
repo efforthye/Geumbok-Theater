@@ -1,20 +1,42 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
-const RegistComponent = (): React.ReactElement => {
-  const [registInfo, setInfo] = useState({
-    name: "",
-    ID: "",
-    Pw: "",
-    PwInvaild: "",
-    phone: "",
-    email: "",
-    address: "",
-    zonecode: "",
-    openPostcode: false,
-  });
+export interface IUserInfo {
+  name: string;
+  ID: string;
+  Pw: string;
+  PwInvaild: string;
+  phone: string;
+  email: string;
+  address: string;
+  zonecode: string;
+  openPostcode: boolean;
+}
+
+const RegistComponent = ({
+  registInfo,
+  handle,
+  setIdHandler,
+  setPwHandler,
+  setPwInvaildHandler,
+  setNameHandler,
+  setPhoneHandler,
+  setEmailHandler,
+}: {
+  registInfo: IUserInfo;
+  handle: {
+    clickButton: () => void;
+    selectAddress: (_data: { address: string; zonecode: string }) => void;
+  };
+  setIdHandler: (_value: string) => void;
+  setPwHandler: (_value: string) => void;
+  setPwInvaildHandler: (_value: string) => void;
+  setNameHandler: (_value: string) => void;
+  setPhoneHandler: (_value: string) => void;
+  setEmailHandler: (_value: string) => void;
+}) => {
   const {
     name,
     ID,
@@ -24,19 +46,27 @@ const RegistComponent = (): React.ReactElement => {
     email,
     address,
     zonecode,
-    openPostcode,
-  } = registInfo;
+  }: IUserInfo = registInfo;
 
-  const handle = {
-    clickButton: () => {
-      setInfo({ ...registInfo, openPostcode: !openPostcode });
-    },
-    selectAddress: (_data: { address: string; zonecode: string }) => {
-      setInfo((state) => ({ ...state, address: _data.address }));
-      setInfo((state) => ({ ...state, zonecode: _data.zonecode }));
-      setInfo((state) => ({ ...state, openPostcode: false }));
-    },
-  };
+  // const setIdHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, ID: _value }));
+  // };
+  // const setPwHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, Pw: _value }));
+  // };
+  // const setPwInvaildHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, PwInvaild: _value }));
+  // };
+  // const setNameHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, name: _value }));
+  // };
+  // const setPhoneHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, phone: _value }));
+  // };
+  // const setEmailHandler = (_value: string) => {
+  //   setInfo((state: IUserInfo) => ({ ...state, email: _value }));
+  // };
+  console.log(registInfo);
   return (
     <RegistBox>
       <div className="background">
@@ -51,13 +81,9 @@ const RegistComponent = (): React.ReactElement => {
                     type={"text"}
                     placeholder={"ID"}
                     autoComplete={"off"}
-                    value={ID}
+                    value={ID || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      // setInfo((state) => ({ ...state, ID: (e.target as HTMLInputElement).value }));
-                      setInfo((state) => ({
-                        ...state,
-                        ID: e.currentTarget.value,
-                      }));
+                      setIdHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -67,6 +93,10 @@ const RegistComponent = (): React.ReactElement => {
                     type={"password"}
                     placeholder={"PW"}
                     autoComplete={"off"}
+                    value={Pw || ""}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      setPwHandler(e.currentTarget.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -75,6 +105,10 @@ const RegistComponent = (): React.ReactElement => {
                     type={"text"}
                     placeholder={"Name"}
                     autoComplete={"off"}
+                    value={name || ""}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      setNameHandler(e.currentTarget.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -83,6 +117,10 @@ const RegistComponent = (): React.ReactElement => {
                     type={"password"}
                     placeholder={"PW Check"}
                     autoComplete={"off"}
+                    value={PwInvaild || ""}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      setPwInvaildHandler(e.currentTarget.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -91,6 +129,10 @@ const RegistComponent = (): React.ReactElement => {
                     type={"text"}
                     placeholder={"phoneNum"}
                     autoComplete={"off"}
+                    value={phone || ""}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      setPhoneHandler(e.currentTarget.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -99,6 +141,10 @@ const RegistComponent = (): React.ReactElement => {
                     type={"email"}
                     placeholder={"email"}
                     autoComplete={"off"}
+                    value={email || ""}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                      setEmailHandler(e.currentTarget.value);
+                    }}
                   />
                 </div>
               </div>
