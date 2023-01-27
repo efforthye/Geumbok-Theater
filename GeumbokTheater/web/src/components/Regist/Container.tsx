@@ -17,7 +17,7 @@ const RegistContainer = () => {
     openPostcode: false,
   });
 
-  const handle = {
+  const setHandler = {
     clickButton: (): void => {
       setInfo((state: IUserInfo) => ({
         ...state,
@@ -32,37 +32,26 @@ const RegistContainer = () => {
         openPostcode: false,
       }));
     },
+    setIdHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, ID: _value }));
+    },
+    setPwHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, Pw: _value }));
+    },
+    setPwInvaildHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, PwInvaild: _value }));
+    },
+    setNameHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, name: _value }));
+    },
+    setPhoneHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, phone: _value }));
+    },
+    setEmailHandler: (_value: string) => {
+      setInfo((state: IUserInfo) => ({ ...state, email: _value }));
+    },
   };
 
-  const setIdHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, ID: _value }));
-  };
-  const setPwHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, Pw: _value }));
-  };
-  const setPwInvaildHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, PwInvaild: _value }));
-  };
-  const setNameHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, name: _value }));
-  };
-  const setPhoneHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, phone: _value }));
-  };
-  const setEmailHandler = (_value: string) => {
-    setInfo((state: IUserInfo) => ({ ...state, email: _value }));
-  };
-  return (
-    <RegistComponent
-      registInfo={registInfo}
-      handle={handle}
-      setIdHandler={setIdHandler}
-      setPwHandler={setPwHandler}
-      setPwInvaildHandler={setPwInvaildHandler}
-      setNameHandler={setNameHandler}
-      setPhoneHandler={setPhoneHandler}
-      setEmailHandler={setEmailHandler}
-    />
-  );
+  return <RegistComponent registInfo={registInfo} setHandler={setHandler} />;
 };
 export default RegistContainer;

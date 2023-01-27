@@ -17,25 +17,19 @@ export interface IUserInfo {
 
 const RegistComponent = ({
   registInfo,
-  handle,
-  setIdHandler,
-  setPwHandler,
-  setPwInvaildHandler,
-  setNameHandler,
-  setPhoneHandler,
-  setEmailHandler,
+  setHandler,
 }: {
   registInfo: IUserInfo;
-  handle: {
+  setHandler: {
     clickButton: () => void;
     selectAddress: (_data: { address: string; zonecode: string }) => void;
+    setIdHandler: (_value: string) => void;
+    setPwHandler: (_value: string) => void;
+    setPwInvaildHandler: (_value: string) => void;
+    setNameHandler: (_value: string) => void;
+    setPhoneHandler: (_value: string) => void;
+    setEmailHandler: (_value: string) => void;
   };
-  setIdHandler: (_value: string) => void;
-  setPwHandler: (_value: string) => void;
-  setPwInvaildHandler: (_value: string) => void;
-  setNameHandler: (_value: string) => void;
-  setPhoneHandler: (_value: string) => void;
-  setEmailHandler: (_value: string) => void;
 }) => {
   const {
     name,
@@ -47,26 +41,6 @@ const RegistComponent = ({
     address,
     zonecode,
   }: IUserInfo = registInfo;
-
-  // const setIdHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, ID: _value }));
-  // };
-  // const setPwHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, Pw: _value }));
-  // };
-  // const setPwInvaildHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, PwInvaild: _value }));
-  // };
-  // const setNameHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, name: _value }));
-  // };
-  // const setPhoneHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, phone: _value }));
-  // };
-  // const setEmailHandler = (_value: string) => {
-  //   setInfo((state: IUserInfo) => ({ ...state, email: _value }));
-  // };
-  console.log(registInfo);
   return (
     <RegistBox>
       <div className="background">
@@ -83,7 +57,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={ID || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setIdHandler(e.currentTarget.value);
+                      setHandler.setIdHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -95,7 +69,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={Pw || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setPwHandler(e.currentTarget.value);
+                      setHandler.setPwHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -107,7 +81,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={name || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setNameHandler(e.currentTarget.value);
+                      setHandler.setNameHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -119,7 +93,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={PwInvaild || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setPwInvaildHandler(e.currentTarget.value);
+                      setHandler.setPwInvaildHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -131,7 +105,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={phone || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setPhoneHandler(e.currentTarget.value);
+                      setHandler.setPhoneHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -143,7 +117,7 @@ const RegistComponent = ({
                     autoComplete={"off"}
                     value={email || ""}
                     onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                      setEmailHandler(e.currentTarget.value);
+                      setHandler.setEmailHandler(e.currentTarget.value);
                     }}
                   />
                 </div>
@@ -153,7 +127,7 @@ const RegistComponent = ({
                   주소{" "}
                   <button
                     className="search-address"
-                    onClick={handle.clickButton}
+                    onClick={setHandler.clickButton}
                   >
                     검색
                   </button>
@@ -176,7 +150,7 @@ const RegistComponent = ({
           <div className="modal-background">
             <div className="address-modal">
               <DaumPostcode
-                onComplete={handle.selectAddress}
+                onComplete={setHandler.selectAddress}
                 autoClose={false}
                 defaultQuery="위례순환로 477"
               />
