@@ -29,7 +29,7 @@ export default function Component() {
   };
 
   return (
-    <>
+    <AppWrap>
       <BigCarouselBox>
         <div className="carousel">
           <Slider {...settings}>
@@ -130,9 +130,13 @@ export default function Component() {
           </div>
         </div>
       </BoxOfBox>
-    </>
+    </AppWrap>
   );
 }
+
+const AppWrap = styled.div`
+  background-color: #121111;
+`;
 
 const BoxOfBox = styled.div`
   width: 60%;
