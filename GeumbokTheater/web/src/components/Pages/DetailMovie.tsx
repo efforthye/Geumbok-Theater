@@ -1,43 +1,28 @@
 import styled from "styled-components";
 
+import BackgroundContainer from "../DetailInfo/Background/Container";
+
 const DetailMovie = () => {
   return (
     <DetailBox>
+      <BackgroundContainer />
       <div>
-        <div className="background"></div>
-        <div className="backgroundInfo">
+        <div>
           <div>
-            <div className="firstFlex">
-              <div>#돌비시네마</div>
-              <div>아바타:물의 길</div>
-              <div>Avatar: The Way of Water</div>
-              <div>
-                <button>하트</button>
-                <button>공유하기</button>
-              </div>
-            </div>
-            <div className="secondFlex">
-              <div>
-                <div>실관람 평점</div>
-                <div>숫자</div>
-              </div>
-              <div>
-                <div>예매율</div>
-                <div>1 위 (20.%)</div>
-              </div>
-              <div>
-                <div>누적관객수</div>
-                <div>10,171,550명</div>
-              </div>
-            </div>
+            <div>주요정보</div>
+            <div>실관람평</div>
+            <div>무비포스트</div>
+            <div>예고편/스틸컷</div>
           </div>
+          <div>아바타: 물의 길은 판도라 행성에서</div>
           <div>
-            <div>사진</div>
-            <div>예매, Dolby</div>
+            '제이크 설리'와 '네이티리'가 이룬 가족이 겪게 되는 무자비한 위협과
+            살아남기 위해 떠나야 하는 긴 여정과 전투, 그리고 견뎌내야 할 상처에
+            대한 이야기를 그렸다.
           </div>
+          <div>더보기</div>
         </div>
       </div>
-      <div>아래 정보들</div>
     </DetailBox>
   );
 };
@@ -48,7 +33,7 @@ const DetailBox = styled.div`
 
   & > div:first-child {
     width: 100%;
-    height: 520px;
+    height: 520px;l
     margin: 0 auto;
     border: 2px solid black;
     background-color: #151515;
@@ -117,4 +102,13 @@ const DetailBox = styled.div`
       }
     }
   }
+   & > div:last-child{
+    width: 100%;
+    padding : 3% 0 0 0 ;
+    &> div{
+      width : 60%;
+      margin:0 auto;
+    }
+
+   }
 `;
