@@ -23,7 +23,7 @@ const DetailMovie = () => {
               </div>
               <div>
                 <div>예매율</div>
-                <div>1</div>
+                <div>1 위 (20.%)</div>
               </div>
               <div>
                 <div>누적관객수</div>
@@ -66,7 +66,7 @@ const DetailBox = styled.div`
     & > .backgroundInfo {
       color: white;
       position: absolute;
-      top: 0;
+      top: 113px;
       left: 20%;
       width: 60%;
       height: inherit;
