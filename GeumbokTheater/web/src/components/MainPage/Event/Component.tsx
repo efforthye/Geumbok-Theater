@@ -3,11 +3,7 @@ import { useState } from "react";
 import Event from "./Container";
 
 const EventComp = () => {
-    return (
-        <div>
-
-        </div>
-    );
+  return <div></div>;
 };
 
 export default EventComp;
