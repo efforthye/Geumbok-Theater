@@ -7,7 +7,7 @@ import AdminContainer from "./components/Admin/Container";
 import MyPageContainer from "./components/Mypage/Container";
 import DetailMovie from "./components/Pages/DetailMovie";
 import BoxOfficeContainer from "./components/boxOffice/Container";
-import Header from "./components/Header";
+import Header from "./components/Header/Containers";
 import MainPage from "./components/MainPage";
 
 function App() {

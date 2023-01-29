@@ -1,12 +1,13 @@
-
+import styled from "styled-components";
 
 const MainPage = () => {
-    return (
-        <div className="MainPage">
-            {/* <Slide /> */}
-            {/* <Event /> */}
-        </div>
-    );
+  return (
+    <LinearBox>
+      <img src="/imgs/main.jpg"></img>
+    </LinearBox>
+  );
 };
 
 export default MainPage;
+
+const LinearBox = styled.div``;
