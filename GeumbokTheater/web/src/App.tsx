@@ -15,6 +15,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/*" element={<MainPage />} />
         <Route path="/regist" element={<RegistContainer />} />
         <Route path="/login" element={<LogInContainer />} />
         <Route path="/admin/:sub" element={<AdminContainer />} />
@@ -23,7 +24,6 @@ function App() {
         <Route path="/mypage/*" element={<MyPageContainer />} />
         <Route path="/detail/*" element={<DetailMovie />} />
         <Route path="/boxOffice/*" element={<BoxOfficeContainer />} />
-        <Route path="/*" element={<MainPage />} />
       </Routes>
     </>
   );
