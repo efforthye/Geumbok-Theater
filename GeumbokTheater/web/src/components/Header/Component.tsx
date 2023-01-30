@@ -1,17 +1,24 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 type Props = {
-  dropdown: () => void;
+  dropdownOver: () => void;
+  dropdownOut: () => void;
   hdd: boolean;
   ddMenu: Array<Array<string>>;
   ddTitle: Array<object>;
+  menuIdx: number;
+  setMenuIdx: Dispatch<SetStateAction<number>>;
 };
 
 const MainHeaderComponent: React.FC<Props> = ({
-  dropdown,
+  dropdownOver,
+  dropdownOut,
   hdd,
   ddMenu,
   ddTitle,
+  menuIdx,
+  setMenuIdx,
 }) => {
   return (
     <FixedBox>
@@ -46,18 +53,19 @@ const MainHeaderComponent: React.FC<Props> = ({
         </UserBox>
       </HeaderBox>
       <DDBox>
-        <DropBox>
-          {/* gdgdgdgdgd */}
-          {ddTitle.map((item: object | string, index: number): any => {
-            // console.log(item.title);
-            <div
+        <DropBox onMouseOver={dropdownOver} onMouseOut={dropdownOut}>
+          {ddTitle.map((item: object, index: number): any => (
+            <HmenuBox
               key={`ddtitle-${index}`}
-              onMouseOver={dropdown}
-              onMouseOut={dropdown}
+              onMouseOver={() => {
+                setMenuIdx(Object(item).index);
+                console.log(menuIdx);
+                console.log(ddMenu[menuIdx]);
+              }}
             >
-              ㅋㅋ
-            </div>;
-          })}
+              {Object(item).title}
+            </HmenuBox>
+          ))}
           {/* <div onMouseOver={dropdown} onMouseOut={dropdown}>
             예매
           </div>
@@ -65,6 +73,12 @@ const MainHeaderComponent: React.FC<Props> = ({
           <div>영화관</div>
           <div>이벤트</div>
           <div>스토어</div> */}
+
+          <MenuBox className={hdd ? "on" : ""}>
+            {ddMenu[menuIdx].map((item: any, index: number): any => (
+              <div key={`dd-${index}`}>{item}</div>
+            ))}
+          </MenuBox>
         </DropBox>
         <AnotherBox>
           <img src="imgs/user.svg"></img>
@@ -74,16 +88,6 @@ const MainHeaderComponent: React.FC<Props> = ({
           <img src="imgs/3bars.svg" className="bars"></img>
         </AnotherBox>
       </DDBox>
-      {hdd ? (
-        <MenuBox>
-          {ddMenu.map((item: any, index: number): any => {
-            console.log(item);
-            <div key={`dd-${index}`}>{item}</div>;
-          })}
-        </MenuBox>
-      ) : (
-        <></>
-      )}
     </FixedBox>
   );
 };
@@ -152,12 +156,13 @@ const DropBox = styled.div`
   height: 20px;
   justify-content: center;
   width: 80%;
-  div {
-    padding: 0 30px;
-    border-right: 1px solid #9d918b;
-  }
+`;
 
-  div:first-child {
+const HmenuBox = styled.div`
+  padding: 0 30px;
+  border-right: 1px solid #9d918b;
+
+  &:first-child {
     margin-left: 200px;
   }
 `;
@@ -200,14 +205,19 @@ const FixedBox = styled.div`
 
 const MenuBox = styled.div`
   position: fixed;
-  display: flex;
+  display: none;
+  width: 1920px;
+  margin-left: 240px;
   color: white;
   justify-content: center;
-  margin-top: 125px;
-  width: 1920px;
+  margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.7);
 
   div {
     margin: 5px 10px;
+  }
+
+  &.on {
+    display: flex;
   }
 `;
