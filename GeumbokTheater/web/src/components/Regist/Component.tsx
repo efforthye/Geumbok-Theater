@@ -4,20 +4,21 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
 export interface IUserInfo {
-  name: string;
-  ID: string;
-  Pw: string;
-  PwInvaild: string;
-  phone: string;
-  email: string;
-  address: string;
-  zonecode: string;
-  openPostcode: boolean;
+  name: string | null;
+  ID: string | null;
+  Pw: string | null;
+  PwInvaild: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  zonecode: string | null;
+  openPostcode?: boolean | null;
 }
 
 const RegistComponent = ({
   registInfo,
   setHandler,
+  onRegist,
 }: {
   registInfo: IUserInfo;
   setHandler: {
@@ -30,6 +31,15 @@ const RegistComponent = ({
     setPhoneHandler: (_value: string) => void;
     setEmailHandler: (_value: string) => void;
   };
+  onRegist: ({
+    name,
+    ID,
+    Pw,
+    phone,
+    email,
+    address,
+    zonecode,
+  }: IUserInfo) => void;
 }) => {
   const {
     name,

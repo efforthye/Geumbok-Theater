@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { action } from "../../modules/userDB";
 import RegistComponent from "./Component";
-
 import { IUserInfo } from "./Component";
 
 const RegistContainer = () => {
@@ -16,6 +17,7 @@ const RegistContainer = () => {
     zonecode: "",
     openPostcode: false,
   });
+  const dispatch = useDispatch();
 
   const setHandler = {
     clickButton: (): void => {
@@ -52,6 +54,24 @@ const RegistContainer = () => {
     },
   };
 
-  return <RegistComponent registInfo={registInfo} setHandler={setHandler} />;
+  const onRegist = (
+    name: string,
+    ID: string,
+    Pw: string,
+    phone: string,
+    email: string,
+    address: string,
+    zonecode: string
+  ): void => {
+    dispatch(action.regist(name, ID, Pw, phone, email, address, zonecode));
+  };
+
+  return (
+    <RegistComponent
+      registInfo={registInfo}
+      setHandler={setHandler}
+      onRegist={onRegist}
+    />
+  );
 };
 export default RegistContainer;
