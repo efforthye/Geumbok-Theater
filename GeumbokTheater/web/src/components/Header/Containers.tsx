@@ -3,6 +3,7 @@ import MainHeaderComponent from "./Component";
 
 const MainHeaderContainer = () => {
   const [hdd, setHdd] = useState(false);
+  const [menuIdx, setMenuIdx] = useState(0);
 
   interface ddTitleI {
     title: string;
@@ -35,18 +36,27 @@ const MainHeaderContainer = () => {
   const ddMenu: Array<Array<string>> = [
     ["예매하기", "상영시간표", "할인안내"],
     ["홈", "현재상영작", "상영예정작"],
+    ["영", "화", "관"],
+    ["이", "벤", "트"],
+    ["스", "토", "어"],
   ];
 
-  const dropdown = () => {
-    setHdd(!hdd);
+  const dropdownOver = () => {
+    setHdd(true);
+  };
+  const dropdownOut = () => {
+    setHdd(false);
   };
 
   return (
     <MainHeaderComponent
-      dropdown={dropdown}
+      dropdownOver={dropdownOver}
+      dropdownOut={dropdownOut}
       hdd={hdd}
       ddMenu={ddMenu}
       ddTitle={ddTitle}
+      menuIdx={menuIdx}
+      setMenuIdx={setMenuIdx}
     />
   );
 };
