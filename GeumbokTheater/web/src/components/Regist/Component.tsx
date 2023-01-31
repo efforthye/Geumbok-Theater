@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
-
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
 export interface IUserInfo {
-  name: string | null;
-  ID: string | null;
-  Pw: string | null;
-  PwInvaild: string | null;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  zonecode: string | null;
+  name: string;
+  ID: string;
+  Pw: string;
+  PwInvaild: string;
+  phone: string;
+  email: string;
+  address: string;
+  zonecode: string;
   openPostcode?: boolean | null;
 }
 
@@ -31,15 +30,15 @@ const RegistComponent = ({
     setPhoneHandler: (_value: string) => void;
     setEmailHandler: (_value: string) => void;
   };
-  onRegist: ({
-    name,
-    ID,
-    Pw,
-    phone,
-    email,
-    address,
-    zonecode,
-  }: IUserInfo) => void;
+  onRegist: (
+    name: string,
+    ID: string,
+    Pw: string,
+    phone: string,
+    email: string,
+    address: string,
+    zonecode: string
+  ) => void;
 }) => {
   const {
     name,
@@ -145,7 +144,19 @@ const RegistComponent = ({
                 {address && zonecode ? address + " , " + zonecode : ""}
               </div>
               <div className="btn-container">
-                <button>단골 입장</button>
+                <button
+                  onClick={() => {
+                    onRegist(name, ID, Pw, phone, email, address, zonecode);
+                    setHandler.setIdHandler("");
+                    setHandler.setPwHandler("");
+                    setHandler.setPwInvaildHandler("");
+                    setHandler.setNameHandler("");
+                    setHandler.setPhoneHandler("");
+                    setHandler.setEmailHandler("");
+                  }}
+                >
+                  단골 입장
+                </button>
                 <Link to={"/login"}>로그인화면으로</Link>
               </div>
             </div>

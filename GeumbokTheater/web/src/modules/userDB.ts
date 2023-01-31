@@ -9,15 +9,15 @@ const TYPE = {
   REGIST: "userDB/regist",
 };
 
-const regist = ({
-  name,
-  ID,
-  Pw,
-  phone,
-  email,
-  address,
-  zonecode,
-}: IUserInfo): IUserAction => {
+const regist = (
+  name: string,
+  ID: string,
+  Pw: string,
+  phone: string,
+  email: string,
+  address: string,
+  zonecode: string
+): IUserAction => {
   return {
     type: TYPE.REGIST,
     payload: {
@@ -34,18 +34,22 @@ const regist = ({
 
 export const action = { regist };
 
-export const initialize: Array<IUserInfo | null> = [];
+export const initialize: Array<string> = [];
 
 export const reducer = (
   state = initialize,
   action: IUserAction
-): Array<IUserInfo | null> => {
+): Array<string> => {
   const { type, payload }: IUserAction = action;
   switch (type) {
     case TYPE.REGIST: {
       const { name, ID, Pw, phone, email, address, zonecode }: IUserInfo =
         payload;
-      return [...state, name, ID, Pw, phone, email, address, zonecode];
+      let tempArr: Array<any> = [
+        ...state,
+        { name, ID, Pw, phone, email, address, zonecode },
+      ];
+      return tempArr;
     }
 
     default:

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { TypedUseSelectorHook } from "react-redux";
 
+import type { RootState, AppDispatch } from "../../modules/store";
 import { action } from "../../modules/userDB";
+
 import RegistComponent from "./Component";
 import { IUserInfo } from "./Component";
 
@@ -17,7 +21,12 @@ const RegistContainer = () => {
     zonecode: "",
     openPostcode: false,
   });
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const navigate = useNavigate();
+
+  const userDB = useAppSelector((state) => state);
+  console.log(userDB);
 
   const setHandler = {
     clickButton: (): void => {
@@ -64,6 +73,7 @@ const RegistContainer = () => {
     zonecode: string
   ): void => {
     dispatch(action.regist(name, ID, Pw, phone, email, address, zonecode));
+    navigate("/");
   };
 
   return (
