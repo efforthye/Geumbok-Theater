@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 type Props = {
   dropdownOver: () => void;
@@ -25,31 +26,35 @@ const MainHeaderComponent: React.FC<Props> = ({
       <HeaderBox>
         <SNSBox>
           <div>
-            <img src="/imgs/facebook.svg"></img>
+            <img src="/imgs/facebook.svg" alt=""></img>
             <div>페이스북</div>
           </div>
           <div>
-            <img src="/imgs/youtube.svg"></img>
+            <img src="/imgs/youtube.svg" alt=""></img>
             <div>유튜브</div>
           </div>
           <div>
-            <img src="/imgs/instagram.svg"></img>
+            <img src="/imgs/instagram.svg" alt=""></img>
             <div>인스타그램</div>
           </div>
         </SNSBox>
 
         <TitleBox>
-          <div>금복</div>
-
-          <img src="/imgs/2-r.png"></img>
-          <div>극장</div>
+          <Link to={"/"}>
+            <div>금복</div>
+            <img src="/imgs/2-r.png" alt=""></img>
+            <div>극장</div>
+          </Link>
         </TitleBox>
 
         <UserBox>
           <div>멤버십</div>
           <div>고객센터</div>
           <div>단체관람/대관문의</div>
-          <div>로그인</div>
+
+          <div>
+            <Link to={"/login"}>로그인</Link>
+          </div>
         </UserBox>
       </HeaderBox>
       <DDBox>
@@ -76,16 +81,20 @@ const MainHeaderComponent: React.FC<Props> = ({
 
           <MenuBox className={hdd ? "on" : ""}>
             {ddMenu[menuIdx].map((item: any, index: number): any => (
-              <div key={`dd-${index}`}>{item}</div>
+              <div key={`dd-${index}`} className={hdd ? "on" : ""}>
+                {item}
+              </div>
             ))}
           </MenuBox>
         </DropBox>
         <AnotherBox>
-          <img src="imgs/user.svg"></img>
-          <div>회원가입</div>
-          <img src="imgs/ticket.svg"></img>
+          <img src="imgs/user.svg" alt=""></img>
+          <div>
+            <Link to={"/regist"}>회원가입</Link>
+          </div>
+          <img src="imgs/ticket.svg" alt=""></img>
           <div>바로 예매</div>
-          <img src="imgs/3bars.svg" className="bars"></img>
+          <img src="imgs/3bars.svg" alt="" className="bars"></img>
         </AnotherBox>
       </DDBox>
     </FixedBox>
@@ -122,8 +131,11 @@ const SNSBox = styled.div`
 `;
 
 const TitleBox = styled.div`
-  display: flex;
-  color: gold;
+  a {
+    display: flex;
+    text-decoration: none;
+    color: gold;
+  }
   div {
     padding-top: 20px;
     font-size: 30px;
@@ -137,6 +149,10 @@ const TitleBox = styled.div`
 const UserBox = styled.div`
   display: flex;
   color: #9d918b;
+  a {
+    text-decoration: none;
+    color: #9d918b;
+  }
   div {
     margin-left: 10px;
     padding-top: 45px;
@@ -173,6 +189,10 @@ const AnotherBox = styled.div`
   justify-content: end;
   height: 20px;
   width: 34%;
+  a {
+    text-decoration: none;
+    color: white;
+  }
   div {
     margin: 0 10px 0 0;
   }
@@ -190,6 +210,7 @@ const AnotherBox = styled.div`
 `;
 
 const FixedBox = styled.div`
+  z-index: 2000;
   position: fixed;
   display: flex;
   height: 200px;
@@ -204,19 +225,21 @@ const FixedBox = styled.div`
 
 const MenuBox = styled.div`
   position: fixed;
-  display: none;
+  display: flex;
   width: 1920px;
   margin-left: 40px;
   color: white;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 25px;
   background-color: rgba(0, 0, 0, 0.7);
-
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
   div {
     margin: 5px 10px;
   }
 
   &.on {
-    display: flex;
+    opacity: 1;
   }
 `;
