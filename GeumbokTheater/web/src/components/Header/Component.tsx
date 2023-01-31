@@ -41,7 +41,7 @@ const MainHeaderComponent: React.FC<Props> = ({
         <TitleBox>
           <div>금복</div>
 
-          <img src="/imgs/2.png"></img>
+          <img src="/imgs/2-r.png"></img>
           <div>극장</div>
         </TitleBox>
 
@@ -155,7 +155,8 @@ const DropBox = styled.div`
   display: flex;
   height: 20px;
   justify-content: center;
-  width: 80%;
+  margin-left: 350px;
+  width: 40%;
 `;
 
 const HmenuBox = styled.div`
@@ -163,7 +164,7 @@ const HmenuBox = styled.div`
   border-right: 1px solid #9d918b;
 
   &:first-child {
-    margin-left: 200px;
+    /* margin-left: 200px; */
   }
 `;
 
@@ -171,9 +172,7 @@ const AnotherBox = styled.div`
   display: flex;
   justify-content: end;
   height: 20px;
-
-  width: 20%;
-
+  width: 34%;
   div {
     margin: 0 10px 0 0;
   }
@@ -207,7 +206,7 @@ const MenuBox = styled.div`
   position: fixed;
   display: none;
   width: 1920px;
-  margin-left: 240px;
+  margin-left: 40px;
   color: white;
   justify-content: center;
   margin-top: 20px;
