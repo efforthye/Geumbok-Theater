@@ -9,6 +9,7 @@ import DetailMovie from "./components/Pages/DetailMovie";
 import BoxOfficeContainer from "./components/boxOffice/Container";
 import Header from "./components/Header/Containers";
 import MainPage from "./components/MainPage";
+import MainFooterContainer from "./components/Footer/Containers";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/boxOffice/*" element={<BoxOfficeContainer />} />
         <Route path="/*" element={<MainPage />} />
       </Routes>
+      <MainFooterContainer />
     </>
   );
 }
