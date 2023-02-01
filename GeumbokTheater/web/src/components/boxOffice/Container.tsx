@@ -1,5 +1,5 @@
-import Component from "./Component";
+import BoxOfficeComponent from "./Component";
 
-export default function Container() {
-  return <Component></Component>;
+export default function BoxOfficeContainer() {
+  return <BoxOfficeComponent></BoxOfficeComponent>;
 }

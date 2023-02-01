@@ -6,7 +6,7 @@ import LogInContainer from "./components/LogIn/Container";
 import AdminContainer from "./components/Admin/Container";
 import MyPageContainer from "./components/Mypage/Container";
 import DetailMovie from "./components/Pages/DetailMovie";
-import BoxOfficeContainer from "./components/boxOffice/Container";
+import BoxOfficeContainer from "./components/BoxOffice/Container";
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
 
