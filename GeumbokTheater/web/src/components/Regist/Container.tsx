@@ -25,9 +25,6 @@ const RegistContainer = () => {
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const navigate = useNavigate();
 
-  const userDB = useAppSelector((state) => state);
-  console.log(userDB);
-
   const setHandler = {
     clickButton: (): void => {
       setInfo((state: IUserInfo) => ({
