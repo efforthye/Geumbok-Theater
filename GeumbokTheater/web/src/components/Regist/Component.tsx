@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
+import { useEffect, useState } from "react";
 
 export interface IUserInfo {
   name: string;
@@ -50,6 +51,44 @@ const RegistComponent = ({
     address,
     zonecode,
   }: IUserInfo = registInfo;
+  const [checkId, setId] = useState(false);
+  const [checkPw, setPw] = useState(false);
+  const [checkPhone, setPhone] = useState(false);
+  const [checkEmail, setemail] = useState(false);
+  const [checkName, setName] = useState(false);
+
+  useEffect(() => {
+    const regex = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{5,10}$/g;
+    if (regex.test(ID)) setId(true);
+    else setId(false);
+  }, [ID]);
+
+  useEffect(() => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    if (regex.test(Pw)) setPw(true);
+    else setPw(false);
+  }, [Pw]);
+
+  useEffect(() => {
+    const regex = /^\d{3}-\d{3,4}-\d{4}$/;
+    if (regex.test(phone)) setPhone(true);
+    else setPhone(false);
+  }, [phone]);
+
+  useEffect(() => {
+    const regex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regex.test(email)) setemail(true);
+    else setemail(false);
+  }, [email]);
+
+  useEffect(() => {
+    const regex = /^[가-힣]{2,5}$/;
+    if (regex.test(name)) setName(true);
+    else setName(false);
+  }, [name]);
+
   return (
     <RegistBox>
       <div className="background">
@@ -69,6 +108,13 @@ const RegistComponent = ({
                       setHandler.setIdHandler(e.currentTarget.value);
                     }}
                   />
+                  {!checkId || ID === "" ? (
+                    <div className="exception">
+                      5자 이상 10자 이하의 영문자와 숫자로만 입력해주세요
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div>
                   <div>비밀번호</div>
@@ -81,6 +127,13 @@ const RegistComponent = ({
                       setHandler.setPwHandler(e.currentTarget.value);
                     }}
                   />
+                  {!checkPw || Pw === "" ? (
+                    <div className="exception">
+                      최소 8자 이상이면서 숫자와 특수문자가 있어야합니다
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div>
                   <div>이름</div>
@@ -93,6 +146,13 @@ const RegistComponent = ({
                       setHandler.setNameHandler(e.currentTarget.value);
                     }}
                   />
+                  {!checkName || name === "" ? (
+                    <div className="exception">
+                      2-5자 한글 이름만 입력하세요
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div>
                   <div>비밀번호 확인</div>
@@ -105,6 +165,13 @@ const RegistComponent = ({
                       setHandler.setPwInvaildHandler(e.currentTarget.value);
                     }}
                   />
+                  {checkPw && Pw === PwInvaild ? (
+                    <></>
+                  ) : (
+                    <div className="exception">
+                      비밀번호가 일치하지 않습니다
+                    </div>
+                  )}
                 </div>
                 <div>
                   <div>휴대전화 번호</div>
@@ -117,6 +184,13 @@ const RegistComponent = ({
                       setHandler.setPhoneHandler(e.currentTarget.value);
                     }}
                   />
+                  {!checkPhone ? (
+                    <div className="exception">
+                      핸드폰번호 형식이 올바르지 않습니다
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div>
                   <div>이메일</div>
@@ -129,6 +203,13 @@ const RegistComponent = ({
                       setHandler.setEmailHandler(e.currentTarget.value);
                     }}
                   />
+                  {!checkEmail || email === "" ? (
+                    <div className="exception">
+                      이메일 형식에 올바르지 않습니다
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
               <div>
@@ -144,19 +225,30 @@ const RegistComponent = ({
                 {address && zonecode ? address + " , " + zonecode : ""}
               </div>
               <div className="btn-container">
-                <button
-                  onClick={() => {
-                    onRegist(name, ID, Pw, phone, email, address, zonecode);
-                    setHandler.setIdHandler("");
-                    setHandler.setPwHandler("");
-                    setHandler.setPwInvaildHandler("");
-                    setHandler.setNameHandler("");
-                    setHandler.setPhoneHandler("");
-                    setHandler.setEmailHandler("");
-                  }}
-                >
-                  단골 입장
-                </button>
+                {checkId &&
+                checkPw &&
+                checkPhone &&
+                checkEmail &&
+                checkName &&
+                Pw === PwInvaild &&
+                address !== "" &&
+                zonecode !== "" ? (
+                  <button
+                    onClick={() => {
+                      onRegist(name, ID, Pw, phone, email, address, zonecode);
+                      setHandler.setIdHandler("");
+                      setHandler.setPwHandler("");
+                      setHandler.setPwInvaildHandler("");
+                      setHandler.setNameHandler("");
+                      setHandler.setPhoneHandler("");
+                      setHandler.setEmailHandler("");
+                    }}
+                  >
+                    단골 입장
+                  </button>
+                ) : (
+                  <button>단골 입장</button>
+                )}
                 <Link to={"/login"}>로그인화면으로</Link>
               </div>
             </div>
@@ -318,5 +410,8 @@ const RegistBox = styled.div`
       // #E1B643 (황금)
       background-color: #121111;
     }
+  }
+  .exception {
+    color: red;
   }
 `;
