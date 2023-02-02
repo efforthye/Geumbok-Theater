@@ -58,10 +58,16 @@ const MainHeaderComponent: React.FC<Props> = ({
         </UserBox>
       </HeaderBox>
       <DDBox>
-        <DropBox onMouseOver={dropdownOver} onMouseOut={dropdownOut}>
+        <DropBox
+          onMouseOver={dropdownOver}
+          onMouseOut={dropdownOut}
+          menuIdx={menuIdx}
+          hdd={hdd}
+        >
           {ddTitle.map((item: object, index: number): any => (
             <HmenuBox
               key={`ddtitle-${index}`}
+              className={menuIdx == index ? "on" : ""}
               onMouseOver={() => {
                 setMenuIdx(Object(item).index);
                 console.log(menuIdx);
@@ -78,11 +84,11 @@ const MainHeaderComponent: React.FC<Props> = ({
           <div>영화관</div>
           <div>이벤트</div>
           <div>스토어</div> */}
-
+          {/* <ColorLine>gdgd</ColorLine> */}
           <MenuBox className={hdd ? "on" : ""}>
             {ddMenu[menuIdx].map((item: any, index: number): any => (
-              <div key={`dd-${index}`} className={hdd ? "on" : ""}>
-                {item}
+              <div key={`dd-${index}`}>
+                <div className={hdd ? "on" : ""}>{item}</div>
               </div>
             ))}
           </MenuBox>
@@ -111,13 +117,15 @@ const HeaderBox = styled.div`
 `;
 
 const SNSBox = styled.div`
+  position: absolute;
+  top: 25px;
+  height: 100%;
   display: flex;
   color: #9d918b;
   align-items: center;
 
   img {
     width: 12px;
-    padding-top: 10px;
     margin-right: 5px;
     filter: invert(57%) sepia(1%) saturate(3229%) hue-rotate(340deg)
       brightness(102%) contrast(92%);
@@ -126,18 +134,18 @@ const SNSBox = styled.div`
   div {
     display: flex;
     margin-right: 5px;
-    padding-top: 10px;
   }
 `;
 
 const TitleBox = styled.div`
+  margin: auto;
   a {
     display: flex;
     text-decoration: none;
     color: gold;
+    align-items: center;
   }
   div {
-    padding-top: 20px;
     font-size: 30px;
   }
   img {
@@ -147,7 +155,12 @@ const TitleBox = styled.div`
 `;
 
 const UserBox = styled.div`
+  position: absolute;
+  top: 25px;
+  height: 100%;
+  right: 0;
   display: flex;
+  align-items: center;
   color: #9d918b;
   a {
     text-decoration: none;
@@ -155,11 +168,11 @@ const UserBox = styled.div`
   }
   div {
     margin-left: 10px;
-    padding-top: 45px;
   }
 `;
 
 const DDBox = styled.div`
+  position: relative;
   width: 1200px;
   display: flex;
   justify-content: center;
@@ -167,28 +180,76 @@ const DDBox = styled.div`
   color: white;
 `;
 
-const DropBox = styled.div`
+const DropBox = styled.div<{ menuIdx: number; hdd: boolean }>`
   display: flex;
   height: 20px;
   justify-content: center;
-  margin-left: 350px;
-  width: 40%;
+  margin: 0 auto;
+  width: 50%;
+  position: relative;
+  text-align: center;
+
+  div:nth-child(5) {
+    border-right: none;
+  }
+
+  &::after {
+    content: "";
+    width: 80px;
+    height: 3px;
+    position: absolute;
+    background-color: #ff0000b9;
+    left: ${({ menuIdx }) => {
+      return menuIdx * 100 + 60 + "px";
+    }};
+    top: 23px;
+    transition: left 0.5s ease-out;
+
+    /* display: ${({ hdd }) => (hdd ? "block" : "none")}; */
+    animation: ${({ hdd }) => {
+      return hdd ? "mouseenter .5s ease-out" : "mouseleave .8s ease-out";
+    }};
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes mouseleave {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      left: -100px;
+      display: none;
+    }
+  }
+  @keyframes mouseenter {
+    from {
+      opacity: 0;
+      display: block;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const HmenuBox = styled.div`
   padding: 0 30px;
   border-right: 1px solid #9d918b;
+  width: 100px;
+  white-space: nowrap;
 
-  &:first-child {
-    /* margin-left: 200px; */
+  &.on {
   }
 `;
 
 const AnotherBox = styled.div`
+  position: absolute;
+  right: 0;
   display: flex;
   justify-content: end;
   height: 20px;
-  width: 34%;
+  width: 20%;
   a {
     text-decoration: none;
     color: white;
