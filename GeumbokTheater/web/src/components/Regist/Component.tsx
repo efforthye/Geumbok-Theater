@@ -3,17 +3,7 @@ import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 import { useEffect, useState } from "react";
 
-export interface IUserInfo {
-  name: string;
-  ID: string;
-  Pw: string;
-  PwInvaild: string;
-  phone: string;
-  email: string;
-  address: string;
-  zonecode: string;
-  openPostcode?: boolean | null;
-}
+import { IUserInfo } from "./Container";
 
 const RegistComponent = ({
   registInfo,
@@ -249,7 +239,7 @@ const RegistComponent = ({
                 ) : (
                   <button>단골 입장</button>
                 )}
-                <Link to={"/login"}>로그인화면으로</Link>
+                <Link to={"/"}>메인화면으로</Link>
               </div>
             </div>
           </div>
