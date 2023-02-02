@@ -1,4 +1,4 @@
-import { IUserInfo } from "../components/Regist/Component";
+import { IUserInfo } from "../components/Regist/Container";
 
 interface IUserAction {
   type: string;

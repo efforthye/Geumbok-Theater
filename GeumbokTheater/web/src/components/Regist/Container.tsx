@@ -7,7 +7,18 @@ import type { RootState, AppDispatch } from "../../modules/store";
 import { action } from "../../modules/userDB";
 
 import RegistComponent from "./Component";
-import { IUserInfo } from "./Component";
+
+export interface IUserInfo {
+  name: string;
+  ID: string;
+  Pw: string;
+  PwInvaild: string;
+  phone: string;
+  email: string;
+  address: string;
+  zonecode: string;
+  openPostcode?: boolean | null;
+}
 
 const RegistContainer = () => {
   const [registInfo, setInfo] = useState<IUserInfo>({
@@ -70,7 +81,7 @@ const RegistContainer = () => {
     zonecode: string
   ): void => {
     dispatch(action.regist(name, ID, Pw, phone, email, address, zonecode));
-    navigate("/");
+    navigate("/login");
   };
 
   return (
