@@ -239,7 +239,7 @@ const RegistComponent = ({
                 ) : (
                   <button>단골 입장</button>
                 )}
-                <Link to={"/login"}>로그인화면으로</Link>
+                <Link to={"/"}>메인화면으로</Link>
               </div>
             </div>
           </div>
