@@ -1,15 +1,76 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const LogInComponent = () => {
+import { ILogin } from "./Container";
+
+const LogInComponent = ({
+  logInInfo,
+  setLogIn,
+}: {
+  logInInfo: ILogin;
+  setLogIn: React.Dispatch<React.SetStateAction<ILogin>>;
+}) => {
+  const { logID, logPw }: ILogin = logInInfo;
+  const [checkLogId, setLogId] = useState(false);
+  const [checkLogPw, setLogPw] = useState(false);
+
+  useEffect(() => {
+    const regex = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{5,10}$/g;
+    if (regex.test(logID)) setLogId(true);
+    else setLogId(false);
+  }, [logID]);
+
+  useEffect(() => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    if (regex.test(logPw)) setLogPw(true);
+    else setLogPw(false);
+  }, [logPw]);
   return (
     <RegistBox>
       <div className="background">
         <div className="regist-box">
           <div className="regist-inner-item">
             <div>금복극장 입장하기</div>
-            <input type={"text"} placeholder={"ID"} autoComplete={"off"} />
-            <input type={"password"} placeholder={"PW"} autoComplete={"off"} />
+            <input
+              type={"text"}
+              placeholder={"ID"}
+              autoComplete={"off"}
+              value={logID || ""}
+              onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                setLogIn((state: ILogin) => ({
+                  ...state,
+                  logID: e.currentTarget.value,
+                }));
+              }}
+            />
+            {!checkLogId || logID === "" ? (
+              <div className="exception">
+                5자 이상 10자 이하의 영문자와 숫자로만 입력해주세요
+              </div>
+            ) : (
+              <></>
+            )}
+            <input
+              type={"password"}
+              placeholder={"PW"}
+              autoComplete={"off"}
+              value={logPw || ""}
+              onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                setLogIn((state: ILogin) => ({
+                  ...state,
+                  logPw: e.currentTarget.value,
+                }));
+              }}
+            />
+            {!checkLogPw || logPw === "" ? (
+              <div className="exception">
+                최소 8자 이상이면서 숫자와 특수문자가 있어야합니다
+              </div>
+            ) : (
+              <></>
+            )}
             <button>입장!</button>
             <Link to={"/regist"}>단골되기</Link>
           </div>
@@ -93,5 +154,9 @@ const RegistBox = styled.div`
         }
       }
     }
+  }
+  .exception {
+    font-size: 0.7rem !important;
+    color: red;
   }
 `;
