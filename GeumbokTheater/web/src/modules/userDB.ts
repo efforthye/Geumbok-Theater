@@ -45,11 +45,10 @@ export const reducer = (
     case TYPE.REGIST: {
       const { name, ID, Pw, phone, email, address, zonecode }: IUserInfo =
         payload;
-      let tempArr: Array<any> = [
-        ...state,
-        { name, ID, Pw, phone, email, address, zonecode },
-      ];
-      return tempArr;
+      let tempArr: Array<any> = [...state];
+      if (tempArr.find((item) => item.ID === ID)) return state;
+      else
+        return [...tempArr, { name, ID, Pw, phone, email, address, zonecode }];
     }
 
     default:
