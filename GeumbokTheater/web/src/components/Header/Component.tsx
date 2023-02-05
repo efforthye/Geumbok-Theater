@@ -77,15 +77,8 @@ const MainHeaderComponent: React.FC<Props> = ({
               {Object(item).title}
             </HmenuBox>
           ))}
-          {/* <div onMouseOver={dropdown} onMouseOut={dropdown}>
-            예매
-          </div>
-          <div>영화</div>
-          <div>영화관</div>
-          <div>이벤트</div>
-          <div>스토어</div> */}
-          {/* <ColorLine>gdgd</ColorLine> */}
-          <MenuBox className={hdd ? "on" : ""}>
+
+          <MenuBox hdd={hdd} className={hdd ? "on" : ""}>
             {ddMenu[menuIdx].map((item: any, index: number): any => (
               <div key={`dd-${index}`}>
                 <div className={hdd ? "on" : ""}>{item}</div>
@@ -182,7 +175,7 @@ const DDBox = styled.div`
 
 const DropBox = styled.div<{ menuIdx: number; hdd: boolean }>`
   display: flex;
-  height: 20px;
+  height: 25px;
   justify-content: center;
   margin: 0 auto;
   width: 50%;
@@ -202,10 +195,9 @@ const DropBox = styled.div<{ menuIdx: number; hdd: boolean }>`
     left: ${({ menuIdx }) => {
       return menuIdx * 100 + 60 + "px";
     }};
-    top: 23px;
+    top: 25px;
     transition: left 0.5s ease-out;
 
-    /* display: ${({ hdd }) => (hdd ? "block" : "none")}; */
     animation: ${({ hdd }) => {
       return hdd ? "mouseenter .5s ease-out" : "mouseleave .8s ease-out";
     }};
@@ -234,13 +226,12 @@ const DropBox = styled.div<{ menuIdx: number; hdd: boolean }>`
 `;
 
 const HmenuBox = styled.div`
-  padding: 0 30px;
   border-right: 1px solid #9d918b;
   width: 100px;
   white-space: nowrap;
-
-  &.on {
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const AnotherBox = styled.div`
@@ -284,23 +275,20 @@ const FixedBox = styled.div`
   );
 `;
 
-const MenuBox = styled.div`
+const MenuBox = styled.div<{ hdd: boolean }>`
   position: fixed;
-  display: flex;
   width: 1920px;
-  margin-left: 40px;
   color: white;
   justify-content: center;
   margin-top: 25px;
   background-color: rgba(0, 0, 0, 0.7);
   font-size: 15px;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+  display: none;
   div {
-    margin: 5px 10px;
+    padding: 5px 10px;
   }
 
   &.on {
-    opacity: 1;
+    display: flex;
   }
 `;
