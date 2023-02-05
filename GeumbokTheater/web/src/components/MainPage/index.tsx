@@ -1,13 +1,7 @@
-import styled from "styled-components";
+import MainCarouselContainer from "./Slide/Container";
 
 const MainPage = () => {
-  return (
-    <LinearBox>
-      <img src="/imgs/main.jpg"></img>
-    </LinearBox>
-  );
+  return <MainCarouselContainer></MainCarouselContainer>;
 };
 
 export default MainPage;
-
-const LinearBox = styled.div``;
