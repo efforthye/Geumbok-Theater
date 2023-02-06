@@ -1,6 +1,6 @@
 import { IUserInfo } from "../components/Regist/Container";
 
-interface IUserAction {
+export interface IUserAction {
   type: string;
   payload?: any;
 }
