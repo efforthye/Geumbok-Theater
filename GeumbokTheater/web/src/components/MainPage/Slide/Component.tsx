@@ -20,15 +20,9 @@ const MainCarouselComponent: React.FC<Props> = ({
   imgs,
   next,
   prev,
-  idx,
   realImgs,
   test,
-  setMove,
 }) => {
-  // useEffect(() => {
-  //   if (test) setMove(imgs.length);
-  //   console.log(test);
-  // }, [move, test]);
   return (
     <TestComp>
       <CarouselImgBox
@@ -38,25 +32,6 @@ const MainCarouselComponent: React.FC<Props> = ({
         test={test}
         className={test ? "" : "test1"}
       >
-        {/* <img src={Object(imgs[0]).src} alt="" />
-        <img src={Object(imgs[1]).src} alt="" />
-        <img src={Object(imgs[2]).src} alt="" /> */}
-        {/* {idx == 0 ? (
-          <img src={Object(imgs[imgs.length - 1]).src}></img>
-        ) : (
-          <img src={Object(imgs[idx - 1]).src}></img>
-        )}
-        <img src={Object(imgs[idx]).src}></img>
-
-        {idx == imgs.length - 1 ? (
-          <img src={Object(imgs[0]).src}></img>
-        ) : (
-          <img src={Object(imgs[idx + 1]).src}></img>
-        )} */}
-        {/* <img src={Object(imgs[idx - 1]).src}></img>
-        <img src={Object(imgs[idx]).src}></img>
-        <img src={Object(imgs[idx + 1]).src}></img> */}
-
         {realImgs.map((item: object, index: number): any => (
           <ImgsBox
             onClick={() => {
@@ -97,12 +72,6 @@ const CarouselImgBox = styled.div<{
   margin-left: ${({ move }) => {
     return move * -1920 + "px";
   }};
-  /* transform: ${({ next }) => {
-    return next ? "translateX(-1920px)" : "";
-  }};
-  transform: ${({ prev }) => {
-    return prev ? "translateX(1920px)" : "";
-  }}; */
 `;
 
 const CarouselBtnBox = styled.div`
