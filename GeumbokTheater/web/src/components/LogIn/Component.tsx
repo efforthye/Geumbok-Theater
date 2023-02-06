@@ -2,30 +2,33 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { ILogin } from "./Container";
-
 const LogInComponent = ({
-  logInInfo,
-  setLogIn,
+  logID,
+  setLogID,
+  logPw,
+  setLogPw,
+  onLogIn,
 }: {
-  logInInfo: ILogin;
-  setLogIn: React.Dispatch<React.SetStateAction<ILogin>>;
+  logID: string;
+  logPw: string;
+  setLogID: React.Dispatch<React.SetStateAction<string>>;
+  setLogPw: React.Dispatch<React.SetStateAction<string>>;
+  onLogIn: (logID: string, logPw: string) => void;
 }) => {
-  const { logID, logPw }: ILogin = logInInfo;
-  const [checkLogId, setLogId] = useState(false);
-  const [checkLogPw, setLogPw] = useState(false);
+  const [checkLogID, setCheckID] = useState(false);
+  const [checkLogPw, setCheckPw] = useState(false);
 
   useEffect(() => {
     const regex = /^(?=.*[0-9]+)[a-zA-Z][a-zA-Z0-9]{5,10}$/g;
-    if (regex.test(logID)) setLogId(true);
-    else setLogId(false);
+    if (regex.test(logID)) setCheckID(true);
+    else setCheckID(false);
   }, [logID]);
 
   useEffect(() => {
     const regex =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    if (regex.test(logPw)) setLogPw(true);
-    else setLogPw(false);
+    if (regex.test(logPw)) setCheckPw(true);
+    else setCheckPw(false);
   }, [logPw]);
   return (
     <RegistBox>
@@ -39,13 +42,10 @@ const LogInComponent = ({
               autoComplete={"off"}
               value={logID || ""}
               onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                setLogIn((state: ILogin) => ({
-                  ...state,
-                  logID: e.currentTarget.value,
-                }));
+                setLogID(e.currentTarget.value);
               }}
             />
-            {!checkLogId || logID === "" ? (
+            {!checkLogID || logID === "" ? (
               <div className="exception">
                 5자 이상 10자 이하의 영문자와 숫자로만 입력해주세요
               </div>
@@ -58,10 +58,7 @@ const LogInComponent = ({
               autoComplete={"off"}
               value={logPw || ""}
               onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                setLogIn((state: ILogin) => ({
-                  ...state,
-                  logPw: e.currentTarget.value,
-                }));
+                setLogPw(e.currentTarget.value);
               }}
             />
             {!checkLogPw || logPw === "" ? (
@@ -71,7 +68,13 @@ const LogInComponent = ({
             ) : (
               <></>
             )}
-            <button>입장!</button>
+            <button
+              onClick={() => {
+                onLogIn(logID, logPw);
+              }}
+            >
+              입장!
+            </button>
             <Link to={"/regist"}>단골되기</Link>
           </div>
           <div className="regist-inner-item">

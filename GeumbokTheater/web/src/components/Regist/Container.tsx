@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { TypedUseSelectorHook } from "react-redux";
 
-import type { RootState, AppDispatch } from "../../modules/store";
+import type { AppDispatch } from "../../modules/store";
 import { action } from "../../modules/userDB";
 
 import RegistComponent from "./Component";
@@ -17,7 +16,7 @@ export interface IUserInfo {
   email: string;
   address: string;
   zonecode: string;
-  openPostcode?: boolean | null;
+  openPostcode?: boolean;
 }
 
 const RegistContainer = () => {
@@ -33,7 +32,6 @@ const RegistContainer = () => {
     openPostcode: false,
   });
   const dispatch = useDispatch<AppDispatch>();
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const navigate = useNavigate();
 
   const setHandler = {
