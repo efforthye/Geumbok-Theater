@@ -5,73 +5,59 @@ const MainCarouselContainer = () => {
   const [next, setNext] = useState(false);
   const [prev, setPrev] = useState(false);
   const [move, setMove] = useState(1);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
+  const [test, setTest] = useState(false);
 
-  interface imgsI {
-    src: string;
-  }
-
-  const imgs: Array<imgsI> = [
-    {
-      src: "/imgs/main3.jpg",
-    },
+  const imgs: Array<Object> = [
     {
       src: "/imgs/main.jpg",
     },
     {
       src: "/imgs/main2.jpg",
     },
+    {
+      src: "/imgs/main3.jpg",
+    },
   ];
 
+  const realImgs: Array<Object> = [imgs[imgs.length - 1], ...imgs, imgs[0]];
+
   const nextOnclick = () => {
-    // imgs.push(imgs[0]);
-    // imgs.shift();
-    // setNext(true);
-    // setIdx(idx + 1);
+    if (next) return;
+    setNext(true);
     setMove(move + 1);
-    if (move == 2) {
-      setMove(0);
-      //   setIdx(1);
-    }
-    // setTimeout(() => {
-    //   // setNext(false);
-    //   if (idx == imgs.length - 1) setMove(0);
-    // }, 500);
-    // console.log(imgs);
-    // if (move == 3) {
-    //   setTimeout(() => {
-    //     setMove(1);
-    //     setNext(false);
-    //   }, 500);
-    // }
+    setTimeout(() => {
+      setNext(false);
+    }, 600);
   };
 
   const prevOnclick = () => {
-    // imgs.unshift(imgs[imgs.length - 1]);
-    // imgs.pop();
-    // setPrev(true);
-    // setIdx(idx - 1);
+    if (next) return;
+    setNext(true);
     setMove(move - 1);
-    if (move == 0) {
-      //   setIdx(2);
-
-      setMove(2);
-    }
-
-    // setTimeout(() => {
-    //   setPrev(false);
-    //   setMove(move + 1);
-    //   setIdx(idx - 1);
-    // }, 500);
-    // if (move == 1) {
-    //   setTimeout(() => {
-    //     setMove(move - 1);
-    //     setMove(3);
-    //   }, 500);
-    // }
+    setTimeout(() => {
+      setNext(false);
+    }, 600);
   };
 
-  //   useEffect(() => {}, [next, prev]);
+  useEffect(() => {
+    console.log(move);
+    if (move == 0) {
+      setTimeout(() => {
+        setTest(true);
+        setMove(imgs.length);
+      }, 500);
+    } else if (move == imgs.length + 1) {
+      setTimeout(() => {
+        setTest(true);
+        setMove(1);
+      }, 500);
+    } else {
+      setTimeout(() => {
+        setTest(false);
+      }, 100);
+    }
+  }, [next]);
 
   return (
     <MainCarouselComponent
@@ -82,6 +68,9 @@ const MainCarouselContainer = () => {
       move={move}
       imgs={imgs}
       idx={idx}
+      realImgs={realImgs}
+      test={test}
+      setMove={setMove}
     ></MainCarouselComponent>
   );
 };

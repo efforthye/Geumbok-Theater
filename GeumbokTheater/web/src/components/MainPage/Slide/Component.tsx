@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useState, useEffect } from "react";
 type Props = {
   nextOnclick: () => void;
   prevOnclick: () => void;
@@ -8,6 +8,9 @@ type Props = {
   next: boolean;
   prev: boolean;
   idx: number;
+  realImgs: Array<Object>;
+  test: boolean;
+  setMove: any;
 };
 
 const MainCarouselComponent: React.FC<Props> = ({
@@ -18,13 +21,26 @@ const MainCarouselComponent: React.FC<Props> = ({
   next,
   prev,
   idx,
+  realImgs,
+  test,
+  setMove,
 }) => {
+  // useEffect(() => {
+  //   if (test) setMove(imgs.length);
+  //   console.log(test);
+  // }, [move, test]);
   return (
-    <>
-      <CarouselImgBox move={move} next={next} prev={prev}>
-        <img src={Object(imgs[0]).src} alt="" />
+    <TestComp>
+      <CarouselImgBox
+        move={move}
+        next={next}
+        prev={prev}
+        test={test}
+        className={test ? "" : "test1"}
+      >
+        {/* <img src={Object(imgs[0]).src} alt="" />
         <img src={Object(imgs[1]).src} alt="" />
-        <img src={Object(imgs[2]).src} alt="" />
+        <img src={Object(imgs[2]).src} alt="" /> */}
         {/* {idx == 0 ? (
           <img src={Object(imgs[imgs.length - 1]).src}></img>
         ) : (
@@ -41,7 +57,7 @@ const MainCarouselComponent: React.FC<Props> = ({
         <img src={Object(imgs[idx]).src}></img>
         <img src={Object(imgs[idx + 1]).src}></img> */}
 
-        {/* {imgs.map((item: object, index: number): any => (
+        {realImgs.map((item: object, index: number): any => (
           <ImgsBox
             onClick={() => {
               console.log(imgs);
@@ -50,7 +66,7 @@ const MainCarouselComponent: React.FC<Props> = ({
           >
             <img src={Object(item).src}></img>
           </ImgsBox>
-        ))} */}
+        ))}
       </CarouselImgBox>
       <CarouselBtnBox>
         <div onClick={prevOnclick}>
@@ -60,16 +76,21 @@ const MainCarouselComponent: React.FC<Props> = ({
           <img src="/imgs/nextBtn.svg" alt=""></img>
         </div>
       </CarouselBtnBox>
-    </>
+    </TestComp>
   );
 };
 
 export default MainCarouselComponent;
-
+const TestComp = styled.div`
+  & > .test1 {
+    transition: margin-left 0.4s ease-out;
+  }
+`;
 const CarouselImgBox = styled.div<{
   move: number;
   next: boolean;
   prev: boolean;
+  test: boolean;
 }>`
   display: flex;
   overflow: hidden;
@@ -82,8 +103,6 @@ const CarouselImgBox = styled.div<{
   transform: ${({ prev }) => {
     return prev ? "translateX(1920px)" : "";
   }}; */
-
-  transition: margin 0.5s ease-in;
 `;
 
 const CarouselBtnBox = styled.div`
