@@ -11,7 +11,7 @@ export interface IUserInfo {
   name: string;
   ID: string;
   Pw: string;
-  PwInvaild: string;
+  PwInvaild?: string;
   phone: string;
   email: string;
   address: string;
