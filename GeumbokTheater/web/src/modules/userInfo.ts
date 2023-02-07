@@ -1,4 +1,5 @@
 import { IUserAction } from "./userDB";
+import { IUserInfo } from "../components/Regist/Container";
 
 const TYPE = {
   LOGIN: "userInfo/login",
@@ -8,7 +9,7 @@ const TYPE = {
 const login = (
   logID: string,
   logPw: string,
-  userDB?: Array<string>
+  userDB?: Array<IUserInfo>
 ): IUserAction => {
   return {
     type: TYPE.LOGIN,
@@ -17,7 +18,7 @@ const login = (
 };
 const logout = (): IUserAction => {
   return {
-    type: TYPE.LOGIN,
+    type: TYPE.LOGOUT,
     payload: {},
   };
 };
@@ -33,7 +34,7 @@ export const reducer = (
   switch (type) {
     case TYPE.LOGIN: {
       const { logID, logPw } = payload;
-      const tempUser = payload.userDB.find((item: any) => item.ID === logID);
+      const tempUser = payload.userDB?.find((item: any) => item.ID === logID);
       if (tempUser && tempUser.Pw === logPw) return { ID: logID, Pw: logPw };
       else return state;
     }

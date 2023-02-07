@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import MainHeaderComponent from "./Component";
+
+import type { AppDispatch } from "../../modules/store";
+import { action } from "../../modules/userInfo";
 
 const MainHeaderContainer = () => {
   const [hdd, setHdd] = useState(false);
   const [menuIdx, setMenuIdx] = useState(0);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   interface ddTitleI {
     title: string;
@@ -58,6 +64,10 @@ const MainHeaderContainer = () => {
     setHdd(false);
   };
 
+  const onLogOut = () => {
+    dispatch(action.logout());
+  };
+
   return (
     <MainHeaderComponent
       dropdownOver={dropdownOver}
@@ -67,6 +77,7 @@ const MainHeaderContainer = () => {
       ddTitle={ddTitle}
       menuIdx={menuIdx}
       setMenuIdx={setMenuIdx}
+      onLogOut={onLogOut}
     />
   );
 };

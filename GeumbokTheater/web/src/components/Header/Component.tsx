@@ -1,6 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { TypedUseSelectorHook } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import type { RootState } from "../../modules/store";
 
 type Props = {
   dropdownOver: () => void;
@@ -10,6 +14,7 @@ type Props = {
   ddTitle: Array<object>;
   menuIdx: number;
   setMenuIdx: Dispatch<SetStateAction<number>>;
+  onLogOut: () => void;
 };
 
 const MainHeaderComponent: React.FC<Props> = ({
@@ -20,7 +25,11 @@ const MainHeaderComponent: React.FC<Props> = ({
   ddTitle,
   menuIdx,
   setMenuIdx,
+  onLogOut,
 }) => {
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const { ID } = useAppSelector((state) => state.userInfo);
+
   return (
     <FixedBox>
       <HeaderBox>
@@ -52,9 +61,19 @@ const MainHeaderComponent: React.FC<Props> = ({
           <div>고객센터</div>
           <div>단체관람/대관문의</div>
 
-          <div>
-            <Link to={"/login"}>로그인</Link>
-          </div>
+          {ID.length ? (
+            <LogOutBtn
+              onClick={() => {
+                onLogOut();
+              }}
+            >
+              로그아웃
+            </LogOutBtn>
+          ) : (
+            <div>
+              <Link to={"/login"}>로그인</Link>
+            </div>
+          )}
         </UserBox>
       </HeaderBox>
       <DDBox>
@@ -89,7 +108,11 @@ const MainHeaderComponent: React.FC<Props> = ({
         <AnotherBox>
           <img src="imgs/user.svg" alt=""></img>
           <div>
-            <Link to={"/regist"}>회원가입</Link>
+            {ID.length ? (
+              <div>{ID} 님</div>
+            ) : (
+              <Link to={"/regist"}>회원가입</Link>
+            )}
           </div>
           <img src="imgs/ticket.svg" alt=""></img>
           <div>바로 예매</div>
@@ -291,4 +314,8 @@ const MenuBox = styled.div<{ hdd: boolean }>`
   &.on {
     display: flex;
   }
+`;
+
+const LogOutBtn = styled.div`
+  cursor: pointer;
 `;
