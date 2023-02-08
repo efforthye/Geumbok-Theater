@@ -13,6 +13,7 @@ type Props = {
   pageOnclick: (index: number) => void;
   playClick: () => void;
   pauseClick: () => void;
+  auto: boolean;
 };
 
 const MainCarouselComponent: React.FC<Props> = ({
@@ -20,21 +21,16 @@ const MainCarouselComponent: React.FC<Props> = ({
   prevOnclick,
   move,
   imgs,
-  next,
   realImgs,
   test,
   pageOnclick,
   playClick,
   pauseClick,
+  auto,
 }) => {
   return (
     <TestComp>
-      <CarouselImgBox
-        move={move}
-        next={next}
-        test={test}
-        className={test ? "" : "test1"}
-      >
+      <CarouselImgBox move={move} className={test ? "" : "test1"}>
         {realImgs.map((item: object, index: number): any => (
           <ImgsBox
             onClick={() => {
@@ -66,10 +62,10 @@ const MainCarouselComponent: React.FC<Props> = ({
         ))}
       </CarouselPageBox>
       <CarouselAutoBtnBox>
-        <div onClick={pauseClick}>
+        <div onClick={pauseClick} className={auto ? "" : "on"}>
           <img src="/imgs/pauseBtn.svg" alt="" />
         </div>
-        <div onClick={playClick}>
+        <div onClick={playClick} className={auto ? "on" : ""}>
           <img src="/imgs/playBtn.svg" alt="" />
         </div>
       </CarouselAutoBtnBox>
@@ -84,13 +80,19 @@ const CarouselAutoBtnBox = styled.div`
   display: flex;
   top: 720px;
   right: 515px;
+
+  .on {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(168deg)
+      brightness(100%) contrast(400%);
+  }
   div {
     margin-right: 5px;
+    cursor: pointer;
   }
   img {
     width: 10px;
-    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(168deg)
-      brightness(113%) contrast(101%);
+    filter: invert(38%) sepia(7%) saturate(358%) hue-rotate(202deg)
+      brightness(44%) contrast(100%);
   }
 `;
 
@@ -105,6 +107,7 @@ const CarouselPageBox = styled.div`
     height: 10px;
     border-radius: 5px;
     margin-right: 5px;
+    cursor: pointer;
 
     &.on {
       background-color: white;
@@ -112,15 +115,16 @@ const CarouselPageBox = styled.div`
   }
 `;
 const TestComp = styled.div`
-  & > .test1 {
+  /* & > .test1 {
     transition: margin-left 0.4s ease-out;
-  }
+  } */
 `;
 const CarouselImgBox = styled.div<{
   move: number;
-  next: boolean;
-  test: boolean;
 }>`
+  &.test1 {
+    transition: margin-left 0.4s ease-out;
+  }
   display: flex;
   overflow: hidden;
   margin-left: ${({ move }) => {

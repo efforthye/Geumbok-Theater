@@ -1,6 +1,5 @@
 import MainCarouselComponent from "./Component";
 import { useState, useEffect } from "react";
-import { setInterval } from "timers/promises";
 
 const MainCarouselContainer = () => {
   const [next, setNext] = useState(false);
@@ -130,6 +129,7 @@ const MainCarouselContainer = () => {
       pageOnclick={pageOnclick}
       playClick={playClick}
       pauseClick={pauseClick}
+      auto={auto}
     ></MainCarouselComponent>
   );
 };
