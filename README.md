@@ -1,11 +1,13 @@
 # Geumbok-Theater
-## Node.js, react, MongoDB를 활용한 영화 예매 플랫폼 사이드 프로젝트 ##
+## 영화 예매 플랫폼 사이드 프로젝트 ##
+
 <br/>
 
 ## 개요
 - 현재 학습중인 훈련(블록체인/솔리디티 등)에 대해서 지장이 크지 않을 정도로 참여
 - 단순한 클론 코딩이 아닌 우리가 창의적으로 기획한 프로젝트 만들어 보기
 - 거창하지 않게 하기, 거창하면 좋겠지만 오래 걸리니까 일단 거창하지 않게 하기
+- stack : TypeScript, Node.js, React, MongoDB
 <br/><br/>
 
 ## 계획
@@ -19,6 +21,6 @@
 ## 팀
 - 팀명 : 둥글둥글("둥글".repeat(2));
 - 팀장 : 박혜림, 부팀장 : 염예나
-- 팀원 : 김선주, 장정현, 이가원, 박예성
+- 팀원 : 김선주, 장정현, 이가원
 - 노션 : [금복극장 Notion](https://flashy-scarer-6f0.notion.site/11b774fc2a1b470f9135e7eafc5cd749)
 - 개발 레포지토리 : [금복극장 Git](https://github.com/efforthye/Geumbok-Theater)
