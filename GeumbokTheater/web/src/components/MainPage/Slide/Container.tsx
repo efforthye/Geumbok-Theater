@@ -41,7 +41,6 @@ const MainCarouselContainer = () => {
   };
 
   useEffect(() => {
-    console.log(move);
     if (move == 0) {
       setTimeout(() => {
         setTest(true);

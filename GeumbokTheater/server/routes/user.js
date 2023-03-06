@@ -4,23 +4,39 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
-import User from "../database/user";
+import User from "../database/user.js";
 
 // regist
 router.post("/regist", (req, res) => {
-  User.create({
-    userName: req.body.userName,
-    userId: req.body.userId,
-    userPw: cryptoJs.SHA256(req.body.userPw).toString(),
-    userPhone: req.body.userPhone,
-    userEmail: req.body.userEmail,
-    userAddress: req.body.userAddress,
+  User.findOne({
+    where: { userName: req.body.userName },
   })
     .then((data) => {
-      res.send({ userInfo: data, message: "회원가입 완료", status: 200 });
+      if (data) {
+        res.send({ meeage: "ID Exist" });
+      } else {
+        User.create({
+          userName: req.body.userName,
+          userId: req.body.userId,
+          userPw: cryptoJs.SHA256(req.body.userPw).toString(),
+          userPhone: req.body.userPhone,
+          userEmail: req.body.userEmail,
+          userAddress: req.body.userAddress,
+        })
+          .then((data) => {
+            res.send({
+              userInfo: data,
+              message: "Regist Success",
+              status: 200,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
     });
 });
 
@@ -31,7 +47,7 @@ router.post("/login", (req, res) => {
   })
     .then((data) => {
       if (data) {
-        if (data.userPw === req.body.loginPw) {
+        if (data.userPw === cryptoJs.SHA256(req.body.loginPw).toString()) {
           const token = jwt.sign(
             {
               id: data.userId,

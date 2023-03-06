@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +70,7 @@ const RegistContainer = () => {
     },
   };
 
-  const onRegist = (
+  const onRegist = async (
     name: string,
     ID: string,
     Pw: string,
@@ -77,9 +78,18 @@ const RegistContainer = () => {
     email: string,
     address: string,
     zonecode: string
-  ): void => {
+  ): Promise<void> => {
     dispatch(action.regist(name, ID, Pw, phone, email, address, zonecode));
-    navigate("/login");
+    const data = await axios.post("http://localhost:8080/api/user/regist", {
+      userName: name,
+      userId: ID,
+      userPw: Pw,
+      userPhone: phone.replaceAll("-", ""),
+      userEmail: email,
+      userAddress: address,
+    });
+    console.log(data.data);
+    if (data.data.status == 200) navigate("/login");
   };
 
   return (

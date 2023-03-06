@@ -288,6 +288,7 @@ const RegistBox = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 2001;
       & > .regist-outer-item {
         &:first-child {
           width: 49%;

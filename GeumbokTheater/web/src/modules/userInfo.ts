@@ -33,10 +33,7 @@ export const reducer = (
   const { type, payload }: IUserAction = action;
   switch (type) {
     case TYPE.LOGIN: {
-      const { logID, logPw } = payload;
-      const tempUser = payload.userDB?.find((item: any) => item.ID === logID);
-      if (tempUser && tempUser.Pw === logPw) return { ID: logID, Pw: logPw };
-      else return state;
+      return { ID: payload.logID, Pw: payload.logPw };
     }
     case TYPE.LOGOUT:
       return initialize;

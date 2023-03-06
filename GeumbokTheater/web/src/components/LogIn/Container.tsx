@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { TypedUseSelectorHook } from "react-redux";
 import type { RootState, AppDispatch } from "../../modules/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import LogInComponent from "./Component";
 import { action } from "../../modules/userInfo";
@@ -19,9 +19,21 @@ const LogInContainer = () => {
   const userDB: Array<IUserInfo> = useAppSelector((state) => state.userDB);
   const { ID } = useAppSelector((state) => state.userInfo);
 
-  console.log(userDB);
-  const onLogIn = (logID: string, logPw: string): void => {
-    dispatch(action.login(logID, logPw, userDB));
+  const onLogIn = async (logID: string, logPw: string): Promise<void> => {
+    const data = await axios.post("http://localhost:8080/api/user/login", {
+      loginId: logID,
+      loginPw: logPw,
+    });
+    if (data.data.status == 200) {
+      dispatch(
+        action.login(
+          data.data.data.currUserId,
+          data.data.data.currUserName,
+          userDB
+        )
+      );
+      navigate("/");
+    }
   };
   useEffect(() => {
     if (ID.length) navigate("/");

@@ -3,7 +3,7 @@ import cryptoJs from "crypto-js";
 
 const router = Router();
 
-import User from "../database/user";
+import User from "../database/user.js";
 
 // 로그인한 유저 정보 불러오기
 router.post("/getUserInfo", (req, res) => {
@@ -114,3 +114,4 @@ router.post("/changeAddress", (req, res) => {
       console.error(err);
     });
 });
+export default router;

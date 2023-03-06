@@ -107,6 +107,7 @@ const RegistBox = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 2001;
       & > .regist-inner-item {
         &:first-child {
           width: 45%;
